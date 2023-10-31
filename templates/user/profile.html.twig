@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FINT | CV{% endblock %}
+
+{% block body %}
+<style>
+    .container{
+        margin: 20px;
+    }
+    .btn{
+        margin-bottom: 15px;
+        margin-top:20px
+    }
+</style>
+
+<div class="container d-flex align-items-center flex-column">
+    {% if cv is not null %}
+        <h3>NB : En ajoutant un nouveau CV, vous allez écraser le CV déjà émis.</h3>
+            <a class="btn btn-danger" href="{{ asset(cv)}}" target="_blank">Voir votre cv</a>
+  {% endif %}
+
+
+        {{ form(form) }}
+
+</div>
+{% endblock %}

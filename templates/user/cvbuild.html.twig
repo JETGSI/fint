@@ -1,0 +1,82 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %} FINT | Curriculum Vitae | Ajouter une certficat{% endblock %}
+
+{% block body %}
+<style>
+
+    h3{
+        text-decoration: none;
+    }
+
+    .card{
+        width: 300px;
+        margin: 20px;
+    }
+
+    .row-cols-3{
+        justify-content: center;
+    }
+
+    .card.col{
+        text-decoration: none;
+        color:white;
+        background: #e30719;
+        border: 3px solid #e30719;
+        text-align: center;
+    }
+
+    .card.col:hover{
+        color: #e30719;
+        background: white;
+        border: 3px solid #e30719;
+        font-weight: bold;
+    }
+    h6{
+        margin: 0;
+    }
+    h2 {
+        margin: 30px 0 10px 15px;
+    }
+    div >a > i{
+        font-size: 40px;
+    }
+    .row.row-cols-3{
+        margin-top: 10px ;
+    }
+
+    .card.col.justify-content-center.align-items-center{
+        padding: 50px 20px 50px 20px;
+    }
+</style>
+
+    <h2> Construire votre CV et impressionnez les recruteurs ! </h2>
+<div class="row row-cols-3">
+
+    <a class="card col justify-content-center align-items-center" href="{{ path('app_usercv') }}">
+        <i class="bi bi-file-text"></i>
+        <h6> Afficher votre CV</h6>
+    </a>
+    <a class="card col justify-content-center align-items-center" href="{{ path('app_userAddproj') }}">
+        <i class="bi bi-code-slash"></i>
+        <h6> Ajouter votre projet</h6>
+    </a>
+    <a class="card col justify-content-center align-items-center" href="{{ path('app_useraddproexp') }}">
+        <i class="bi bi-person-workspace"></i>
+        <h6> Ajouter votre expérience professionnelle </h6>
+    </a>
+    <a class="card col justify-content-center align-items-center" href="{{ path('app_useraddassoexp') }}">
+        <i class="bi bi-columns-gap"></i>
+        <h6> Ajouter votre expérience associative </h6>
+    </a>
+    <a class="card col justify-content-center align-items-center" href="{{ path('app_userAddeduexp') }}">
+        <i class="bi bi-journals"></i>
+        <h6> Ajouter votre expérience éducative</h6>
+    </a>
+    <a class="card col justify-content-center align-items-center" href="{{ path('app_useraddcertificat') }}">
+        <i class="bi bi-file-text"></i>
+        <h6> Ajouter votre certificat</h6>
+    </a>
+</div>
+{% endblock %}

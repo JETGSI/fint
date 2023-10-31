@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!
+{% endblock %}
+
+{% block body %}
+	<style>
+		.container {
+			margin: 20px 60px 0 0;
+		}
+	</style>
+
+	<div class="container">
+		<h1>
+			Ajouter votre experience associative</h1>
+		{{ form(form) }}
+			{% if form_errors(form) %}
+				{{ form_errors(form) }}
+			{% endif %}
+
+		</div>
+	{% endblock %}

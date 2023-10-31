@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FINT: Find Your Intership !{% endblock %}
+
+{% block body %}
+<style>
+    #logoJet{
+        width: 500px;
+    }
+    p{
+        font-size: 30px;
+        text-align: center;
+    }
+    .buttons a{
+        padding: 10px 30px 10px 30px;
+        background: #000;
+        color: white;
+        border: 1px solid #000;
+        border-radius: 15px;
+        margin: 10px;
+        text-decoration: none;
+    }
+    .buttons a:hover{
+        background: white;
+        color: black;
+        font-weight: bold;
+    }
+    i{
+        margin-right: 15px;
+    }
+</style>
+
+<div class="d-flex flex-column align-items-center" >
+
+
+    <img class="logoJet" src="{{ asset('build/images/LOGO_JE_Tunisia.png') }}" alt="Logo JET" >
+    <h1> Bienvenue chez la Confédération Tunisienne des Junior Entreprises ! </h1>
+    <h2> <b>FINT: find your internship ! </b></h2>
+    <p> C'est une plateforme de matching entre les étudiants cherchant des stages PFE et des entreprises ! </p>
+        <div class="buttons d-flex justify-content-center">
+            <a href="{{ path('app_login') }}" >
+                <i class="bi bi-box-arrow-in-right"></i>
+                Login </a>
+            <a href="{{ path('app_registration') }}">
+                <i class="bi bi-pencil-square"></i>
+                Inscription</a>
+        </div>
+</div>
+{% endblock %}

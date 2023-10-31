@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} FINT | Candidatures réçus  {% endblock %}
+
+{% block body %}
+<style>
+    table img{
+        width: 50px;
+        border-radius: 50%;
+        height: 50px;
+    }
+    span{
+        margin: 5px;
+    }
+</style>
+
+<div class="container example-wrapper">
+    <h1> Les candidatures réçues | {{ candidatures | length }}</h1>
+    <table class="table table-striped align-middle">
+        <thead>
+        <tr>
+            <th></th>
+            <th scope="col">Etudiant</th>
+            <th scope="col">Référence Sujet</th>
+            <th scope="col">Date du postulation</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cand in candidatures %}
+            <tr>
+                <td><img src="{{ asset(cand.student.img) }}" ></td>
+                <td>
+                    <a target="_blank" href=
+                    {% if  cand.student.je %}
+                        "{{path("entreprisecandidatures_show", {'id' : cand.student.id}) }}">
+                    {% else %}
+                        "{{ asset(cand.student.linkCv) }}">
+                    {% endif %}
+                        {{ cand.student.lastName ~ " " ~ cand.student.firstName  }}
+                        {% if cand.student.je %}
+                        <span class="badge rounded-pill text-bg-dark">J.E</span>
+                        {% endif %}
+                    </a>
+                </td>
+                <td>{{ cand.refsujet }}</td>
+                <td>{{ cand.date | date("m/d/Y H:i") }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

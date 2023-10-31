@@ -1,0 +1,127 @@
+
+    <style>
+        .col-3{
+            width: 300px;
+            margin: 0% !important;
+            background: #000000;
+            color: white;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+        }
+        li{
+            text-decoration: none;
+            list-style-type: none;
+            font-weight: bold !important;
+            border: 0 !important;
+            padding: 20px 0px 25px 15px !important;
+            color: #FFFFFF;
+        }
+        .col-3{
+            padding: 0px;
+        }
+        ul{
+            padding: 0 !important;
+        }
+        #logo{
+            width: 250px;
+            height: auto;
+        }
+        a{
+            text-decoration: none;
+        }
+        i{margin: 5px}
+        li:hover{
+            background: white;
+            color:black;
+        }
+    </style>
+
+    <div class="col-3 d-flex flex-column justify-content-between">
+        <img id="logo" src="{{ asset('build/images/LOGO JE Tunisia White.png') }}" alt="logo">
+        <ul>
+            {% if is_granted("ROLE_STUDENT")%}
+{#            <a href="{{ path('app_userprofile') }}">#}
+{#                <li>#}
+{#                    <i class="bi bi-house"></i>#}
+{#                    Home#}
+{#                </li>#}
+{#            </a>#}
+            <a href="{{ path('app_usercvbuild') }}">
+                <li>
+                    <i class="bi bi-file-earmark-person"></i>
+                    CV
+                </li>
+            </a>
+            <a href="{{ path('app_usercatalogue') }}">
+                <li>
+                    <i class="bi bi-book"></i>
+                    Catalogues des PFEs
+                </li>
+            </a>
+            <a href="{{ path('app_usercandidature') }}">
+                <li>
+                    <i class="bi bi-briefcase"></i>
+                    Candidatures
+                </li>
+            </a>
+            {% elseif is_granted('ROLE_ENTREPRISE') %}
+                <a href="{{ path('entrepriseprofile') }}">
+                    <li>
+                        <i class="bi bi-person"></i>
+                        Profil
+                    </li>
+                </a>
+                <a href="{{ path('entrepriseaddjob') }}">
+                    <li>
+                        <i class="bi bi-file-plus"></i>
+                        Ajouter / Modifier Catalogue
+                    </li>
+                </a>
+                <a href="{{ path('entrepriseentreprise_candidatures') }}">
+                    <li>
+                        <i class="bi bi-briefcase"></i>
+                        Candidatures
+                    </li>
+                </a>
+                <a href="{{ path('entreprise_dashboard') }}">
+                    <li>
+                        <i class="bi bi-person"></i>
+                        Dashboard
+                    </li>
+                </a>
+
+            {% elseif is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('admin_dashboard') }}">
+                    <li>
+                        <i class="bi bi-person"></i>
+                        Dashboard
+                    </li>
+                </a>
+
+                <a href="{{ path('ajouter_entreprise') }}">
+                    <li>
+                        <i class="bi bi-person"></i>
+                        Ajouter Entreprise
+                    </li>
+                </a>
+            {% endif %}
+
+        </ul>
+        {% if is_granted("ROLE_STUDENT") or is_granted('ROLE_ENTREPRISE') or is_granted('ROLE_ADMIN')%}
+        <div>
+            <a href="{{ path('apropos') }}">
+                    <li>
+                        <i class="bi bi-info-circle"></i>
+                        A propos
+                    </li>
+            </a>
+            <a href="{{ path('app_logout') }}">
+                <li>
+                    <i class="bi bi-box-arrow-left"></i>
+                    Logout
+                </li>
+            </a>
+        </div>
+        {% endif %}
+    </div>

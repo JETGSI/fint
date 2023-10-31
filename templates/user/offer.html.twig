@@ -1,0 +1,44 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %} FINT | {{ ent.name }} {% endblock %}
+
+{% block body %}
+<style>
+    img{
+        width: 300px;
+        height: 300px;
+        border-radius:50% ;
+    }
+    .d-flex div{
+        margin: 20px;
+    }
+    form{
+        display: contents !important;
+    }
+    .description{
+        width: 500px;
+    }
+</style>
+
+<div class="container d-flex align-items-center">
+    <img src={{ asset(ent.logoPath) }}>
+    <div>
+        <div>
+            <H1>{{ ent.name }}</H1>
+            <p class="description"> {{ ent.description }} </p>
+            <h4>Catalogue PFEs</h4>
+            <a class="btn btn-outline-info" href='{{ asset(offer.catalogue )}}'>Voir Catalogue: {{ offer.catalogue }}</a>
+
+        </div>
+        <h3> Veuillez écrire la référence du projet choisi ! </h3>
+        {{ form_start(sujet) }}
+        {{ form_errors(sujet) }}
+
+        {{ form_widget(sujet.sujet) }}
+
+        {{ form_widget(sujet.postuler) }}
+        {{ form_end(sujet) }}
+    </div>
+</div>
+{% endblock %}

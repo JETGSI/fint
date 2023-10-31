@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} FINT | Les Catalogues {% endblock %}
+
+{% block body %}
+<style>
+    table img{
+        width: 50px;
+        border-radius: 50%;
+    }
+
+
+</style>
+
+<div class="container">
+    <h1>Vos candidatures</h1>
+    <h5>Si une entreprise ets interessé par votre profil,<br>
+        elle vous contactera</h5>
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th scope="col">Entreprise</th>
+                    <th scope="col">Référence du sujet</th>
+                    <th scope="col">Date de postulation</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for cand in candidatures %}
+                <tr>
+                    <td><img src="{{ asset(cand.entreprise.logoPath) }}" ></td>
+                    <td>{{ cand.entreprise.name }}</td>
+                    <td>{{ cand.refsujet }}</td>
+                    <td>{{ cand.date | date("m/d/Y H:i") }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

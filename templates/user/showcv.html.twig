@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} FINT | Curriculum Vitae | {{ student.firstName ~ " " ~ student.lastName }}{% endblock %}
+
+{% block body %}
+<style>
+    .cv img{
+        width: 250px;
+        border-radius: 50%;
+    }
+    .experience{
+        border: 1px solid black ;
+        border-radius: 20px;
+        margin: 20px;
+        padding: 30px;
+    }
+    .experience .child{
+        text-align: center;
+    }
+
+    .sup{
+        background: #e30719;
+        color: white;
+        margin: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #e30719;
+    }
+    .sup:hover{
+        color: #e30719;
+        background: white;
+    }
+</style>
+    {% if cv is null %}
+        <div> Merci de commencer à créer votre CV </div>
+    {% else %}
+        <div class="cv">
+            <img src="{{ asset(student.img) }}" alt="ACME logo">
+            <h1><b>{{ student.firstName ~ " " ~  student.lastName }}</b></h1>
+
+            <h2>Informations Personnelles</h2>
+            <h3>{{ student.address }}</h3>
+            <h4>{{ user.email }}</h4>
+            <h5>{{ student.linkedinLink }}</h5>
+            <h5>{{ student.telephone }}</h5>
+            {% for i in cv %}
+                <h3>{{ i.certificates ? i.certificates|json_encode : ''  }}</h3>
+            {% endfor %}
+            {% if edu is not empty %}
+            <div class="experience">
+                <h1>Experience educatives</h1>
+
+                {% for i in edu %}
+                    <div class="child">
+                        <h3>{{ i.University }}</h3>
+                        <h6>{{ i.startdate |date("m/d/Y") ~ " - " ~ i.enddate |date("m/d/Y")}}</h6>
+                        <h3>{{ i.description }}</h3>
+                        <div>
+                            <a class="btn btn-outline-danger" href="{{ path('app_usereditedu', {"id": i.id}) }}">Modifier Cette experience</a>
+                            <a class="sup" href="{{ path('app_userdeleteedu',{"id": i.id}) }}"><i class="bi bi-trash"></i></a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+                {% endif %}
+            {% if pro is not empty %}
+            <div class="experience">
+                <h1>Experience Professionelle</h1>
+                {% for i in pro %}
+                    <div class="child">
+                        <h3>{{ i.entreprise }}</h3>
+                        <h6>{{ i.startdate |date("m/d/Y") ~ " - " ~ i.enddate |date("m/d/Y")}}</h6>
+                        <h5>{{ i.poste }}</h5>
+                        <p><b>{{ i.type }}</b></p>
+                        <p>{{ i.description }}</p>
+                        <div>
+                        <a class="btn btn-outline-danger" href="{{ path('app_usereditpro', {"id": i.id}) }}">Modifier Cette experience</a>
+                        <a class="sup" href="{{ path('app_userdeletepro',{"id": i.id}) }}"><i class="bi bi-trash"></i></a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+                {% endif %}
+            {% if asso is not empty %}
+            <div class="experience">
+                <h1>Experience Associatives</h1>
+                {% for i in asso %}
+                    <div class="child">
+                        <h3>{{ i.organization }}</h3>
+                        <h6>{{ i.startdate|date("m/d/Y") ~ " - " ~ i.enddate |date("m/d/Y")}}</h6>
+                        <p>{{ i.description }}</p>
+                        <div>
+                        <a class="btn btn-outline-danger" href="{{ path('app_usereditasso', {"id": i.id}) }}">Modifier Cette experience</a>
+                        <a class="sup" href="{{ path('app_userdeleteasso',{"id": i.id}) }}"><i class="bi bi-trash"></i></a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+                {% endif %}
+            {% if proj is not empty %}
+                <div class="experience">
+                    <h1>Les Projets</h1>
+                    {% for i in proj %}
+                        <div class="child">
+                            <h3>{{ i.nom }}</h3>
+                            <h6>{{ i.date|date("m/d/Y")}}</h6>
+                            <h3>{{ i.descripton }}</h3>
+                            <div>
+                            <a class="btn btn-outline-danger" href="{{ path('app_usereditproject', {"id": i.id}) }}">Modifier Cette experience</a>
+                            <a class="sup" href="{{ path('app_userdeleteproj', {"id": i.id}) }}"><i class="bi bi-trash"></i></a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+        </div>
+    {% endif %}
+
+{% endblock %}

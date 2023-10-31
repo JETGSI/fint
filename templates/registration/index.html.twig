@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FINT | Registration
+{% endblock %}
+
+
+{% block body %}
+
+	<style>
+		.example-wrapper {
+			width: 95%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin: 0 0 50px;
+		}
+		.example-wrapper a {
+			color: black;
+			font-size: 20px;
+		}
+	</style>
+
+	<div class="example-wrapper">
+		<h1>Start Your Experience with FINT!</h1>
+		{% if app.flashes('uniqueEmailError') is not empty %}
+			<div class="container alert alert-danger">
+            email déjà utilisé !
+			</div>
+		{% endif %}
+		{{ form(form) }}
+			<a href="{{ path('app_login') }}">
+				J'ai déjà un compte
+			</a>
+		</div>
+	{% endblock %}

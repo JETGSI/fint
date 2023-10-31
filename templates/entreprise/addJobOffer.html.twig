@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FINT | Catalogue des PFEs{% endblock %}
+
+{% block body %}
+<style>
+
+    .container-fluid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+   .btn{
+       background: black;
+       margin: 10px;
+   }
+</style>
+
+<div class="container-fluid">
+    <h1>Ajouter le catalogue de votre entreprise</h1>
+
+    {% if (Jobexist) %}
+    <h3> En ajoutant un nouveau catalogue PFE, le catalogue déjà émis sera ecrasé </h3>
+    <a class="btn btn-dark" href="{{ asset(Jobexist) }}" target="_blank"> Consulter votre catalogue</a>
+    {% endif %}
+    {{ form(form) }}
+    {% if form_errors(form) %}
+        {{ form_errors(form) }}
+    {% endif %}
+</div>
+{% endblock %}

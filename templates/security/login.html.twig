@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FINT | Bienvenue chez la JET !!{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%;}
+        .example-wrapper a{
+            color: white;
+            font-size: 20px;
+        }
+        button[type="submit"]:hover{
+            background: white;
+            color: #e30719;
+            font-weight: bold;
+        }
+        button[type="submit"]{
+            text-decoration: none;
+        }
+    </style>
+<form method="post" class="example-wrapper">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+        {# affichage des alertes  #}
+        {% if app.flashes('Reset_Password_Email_Sent') is not empty %}
+			<div class="container alert alert-success">
+             <strong>vérifiez votre addresse e-mail </strong> un email de Réinitialisation de mot de passe est envoyé 
+			</div>
+		{% endif %}
+
+        {% if app.flashes('NOT_VALID_TOKEN') is not empty %}
+			<div class="container alert alert-danger">
+             le token n'est pas valide !  
+			</div>
+		{% endif %}
+
+        {% if app.flashes('PASSWORD_Modified') is not empty %}
+			<div class="container alert alert-success">
+             mot de passe changé avec succès  
+			</div>
+		{% endif %}
+
+    <img class="logoJet" src="{{ asset('build/images/LOGO JE Tunisia White.png') }}">
+    <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+    <label for="inputEmail">Adresse mail</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <label for="inputPassword">Mot de passe</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+    <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Se souvenir de moi
+            </label>
+    </div>
+    <button type="submit">
+        <i class="bi bi-box-arrow-in-right"></i>
+        Sign in
+    </button>
+    <a href="{{ path('app_registration') }}"><u>
+            J'ai pas un compte</u></a>
+    <a href="{{ path('forgotten_password') }}"><u>
+            Mot de passe oublié ? </u></a>
+</form>
+{% endblock %}

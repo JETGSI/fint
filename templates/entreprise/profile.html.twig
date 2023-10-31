@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FINT | Profile | {{  entreprise.name }} {% endblock %}
+
+{% block body %}
+<style>
+
+    .entreprise img{
+        width: 250px;
+        height: auto;
+    }
+
+    .entreprise h1 {
+        color: #e30719;
+        font-weight: bold;
+    }
+    .entreprise h6{
+        margin: 10px;
+    }
+    .entreprise.container.d-flex.flex-column.align-items-center {
+     padding: 35px;
+    }
+    
+</style>
+
+<div class="entreprise container d-flex flex-column align-items-center">
+   <h1> {{ entreprise.name }} </h1>
+    <img src="{{ asset(entreprise.logoPath) }}">
+    <h6>{{ entreprise.description }}</h6>
+    <p>Adresse: <b>{{ entreprise.adress }}</b></p>
+    {% if catalogue %}
+    <h4> Consulter votre catalogue</h4>
+    <a class="btn btn-outline-dark" target="_blank" href="{{ asset(catalogue) }}">Voir Catalogue PFE</a>
+    {% else %}
+    <h2> Vous n'avez pas encore ajouter votre catalogue </h2>
+    {% endif %}
+
+ <a class="btn btn-danger" href="{{ path('entrepriseedit', {'id': entreprise.id} )}}">
+  <i class="bi bi-box-arrow-in-up"></i>
+   Mise à jour des données
+ </a>
+
+</div>
+{% endblock %}

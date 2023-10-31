@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Curriculum Vitae {% endblock %}
+
+{% block body %}
+    <h1>CurriculumVitae</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ curriculum_vitae.id }}</td>
+            </tr>
+            <tr>
+                <th>LinkedinAccount</th>
+                <td>{{ curriculum_vitae.linkedinAccount }}</td>
+            </tr>
+            <tr>
+                <th>Certificates</th>
+                <td>{{ curriculum_vitae.certificates ? curriculum_vitae.certificates|json_encode : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_curriculum_vitae_index') }}">back to list</a>
+
+    <a href="{{ path('app_curriculum_vitae_edit', {'id': curriculum_vitae.id}) }}">edit</a>
+
+    {{ include('curriculum_vitae/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} FINT | Les Catalogues {% endblock %}
+
+{% block body %}
+<style>
+    .card{
+        margin: 1% ;
+        width: 20%;
+        height: 20%;
+        padding: 20px;
+        border: 1px solid #000;
+        background: #000;
+    }
+    .card img{
+        width: 100%;
+    }
+
+    .container h3{
+        padding-top: 20px;
+    }
+    .btn-danger{
+        background: #e30719;
+        border: 0px;
+    }
+    h2, h6,h4 ,p{
+        color: #FFFFFF;
+    }
+
+</style>
+
+<div class="container">
+    <h3> Les catalogues des PFEs</h3>
+    <div class="row row-cols-md-3">
+        {% for offer in offers %}
+            <div class="card">
+                <img src="{{ asset(offer.entreprise.logoPath ) }}" class="card-img-top" alt="Logo_ent">
+                <h2>{{ offer.entreprise.name }}</h2>
+                <h6><b>Application deadline:</b> {{ offer.applicationDeadline |date("d/m/Y") }}</h6>
+                <p>{{ offer.entreprise.description | u.truncate(100,'...') }}</p>
+                <a class="btn btn-danger" href="{{ path('app_useroffer', {'id': offer.id}) }}">Postuler</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

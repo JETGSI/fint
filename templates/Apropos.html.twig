@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} FINT | À propos {% endblock %}
+
+{% block body %}
+<style>
+    .card{
+        width:70%
+    }
+    .card-title {
+        font-weight: bold;
+        color: #e30719;
+        font-size: 30px;
+        border-radius: 25px;
+    }
+
+    .card-title h4 {
+        font-style: italic;
+        font-size: 18px;
+    }
+
+    h5 {
+        font-size: 15px;
+        margin: 0px;
+        color: #000000;
+    }
+
+    img{
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        padding: 15px;
+    }
+    h4 {
+        font-size: 18px;
+        font-style: italic;
+    }
+    .d-flex.flex-column.align-items-center{
+        margin: 50px 0 0 0;
+    }
+</style>
+
+<div class="d-flex flex-column align-items-center" >
+
+    {% if is_granted("ROLE_STUDENT")%}
+        <h1> À propos </h1>
+        <p>La Confédération Tunisienne des Junior Entreprises a le plaisir de partager avec vous, la plateforme FINT. <br>
+            FINT est une plateforme conçue afin de faciliter davantage l’insertion des Junior Entrepreneurs dans la vie professionnelle grâce à une conception singulière et standardisée de leurs CV, les distinguant ainsi des autres étudiants de l’écosystème tunisien et ce grâce à une expérience au sein de la Junior Entreprise.
+
+            Une seule étape vous sépare de la concrétisation de tout celà, qui n’est autre que la création de votre propre CV qui sera accessible aux recruteurs. Vous n’aurez donc plus qu’à choisir l’entreprise qui vous intéresse selon votre domaine d’expertise.
+            Veuillez noter que toute modification ou ajout de données dans votre CV sera automatiquement mis à jour.
+        </p>
+    {% elseif is_granted('ROLE_ENTREPRISE') %}
+    <h1> À propos </h1>
+    <p>
+        Chère Entreprise, <br>
+        L’entrée en contact avec les étudiants n’a jamais été aussi simple !
+        Il vous suffit de télécharger votre catalogue de stages sur FINT et de trouver les candidatures des Junior Entrepreneurs dans la partie “candidatures” de la plateforme FINT et ce selon la référence du stage choisie par le candidat.
+        En sélectionnant le Nom de quelconque candidat, vous serez redirigé vers le CV de ce dernier, vous facilitant ainsi le choix.
+        Et si une chose est bien sûre avec FINT, c’est la diversité des profils !
+        Veuillez noter que les profils Junior Entrepreneurs sont des profils qui sont distingués par leur expérience au sein de la Junior Entreprise et qui a comme premier et ultime rôle d’initier ses adhérents à la vie professionnelle, les rendant ainsi plus expérimentés. Ces derniers seront différenciés par un badge Junior Entrepreneur inscrit dans leur CV.
+    </p>
+    {% endif %}
+    <h2>
+        en cas de problème technique vous pouvez contacter:
+    </h2>
+    <div class="card d-flex flex-row align-items-center">
+        <img src="{{ asset("build/images/IMG_1449-pdp.jpg") }}">
+        <div>
+        <h3 class="card-title">
+            Rinez Chiheb
+        </h3>
+        <h4> Responsable des Systèmes d'Informations de la JET</h4>
+        <div class="d-flex align-items-center">
+            <i class="bi bi-envelope"></i>
+            <a href="mailto:chihebrinez@jetunisie.com"><h5>chihebrinez@jetunisie.com</h5></a>
+        </div>
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,155 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FINT | admin Dashboard {% endblock %}
+
+{% block body %}
+
+<style>
+		.mtb-5 {
+			margin-top: 100px;
+			margin-bottom: 300px;
+			margin-right: 50px;
+			width: 40%;
+			height: 100px;
+		}
+
+  .squares{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 150px;
+  }
+  .square {
+      background-color: #e30719;
+      color: #fff;
+      text-align: center;
+      width: 150px;
+      height: 150px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+  }
+
+  .value {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 10px;
+  }
+	</style>
+
+  <div class="squares">
+    <div class="square">
+        <p>Total Views of job offers</p>
+        <p class="value">{{TotalNbViews}}</p>
+    </div>
+    <div class="square">
+        <p>Min Views of job offers</p>
+        <p class="value">{{minViews}}</p>
+    </div>
+    <div class="square">
+        <p>Max Views of job offers</p>
+        <p class="value">{{maxViews}}</p>
+    </div>
+    <div class="square">
+        <p>Average Views of job offers</p>
+        <p class="value">{{moyNbViews}}</p>
+    </div>
+    <div class="square">
+        <p>Number Of Entreprises</p>
+        <p class="value">{{nbEntreprises}}</p>
+    </div>
+    <div class="square">
+        <p>Number Of Subscribed Students</p>
+        <p class="value">{{subscribedStudents}}</p>
+    </div>
+  </div>
+
+	<div class="d-flex justify-content-center flex-wrap">
+		<div class="mtb-5">
+			<canvas id="barChart" width="400" height="200"></canvas>
+		</div>
+		<div class="mtb-5">
+			<canvas id="doughnutChart1" width="400" height="200"></canvas>
+		</div>
+		<div class="mtb-5">
+			<canvas id="doughnutChart" width="400" height="200"></canvas>
+		</div>
+		{# <div class="mtb-5">
+			<canvas id="polarAreaChart" width="400" height="200"></canvas>
+		</div> #}
+	</div>
+
+	
+
+
+<script>
+
+	var subscribedStudents = {{ subscribedStudents }};
+  var completedProfiles = {{ completedProfiles }};
+  var linkedinProfiles = {{ linkedinProfiles }};
+	var nbJEStudents = {{nbJEStudents}}
+	var nb_non_JEStudents = subscribedStudents - nbJEStudents;
+	var nbJobOffer = {{nbJobOffer}}
+	var nbJobInterview = {{nbJobInterview}}
+	var nbJobRequest = {{nbJobRequest}}
+	
+
+const barChartctx = document.getElementById('barChart').getContext('2d');
+const barChart = new Chart(barChartctx, {
+  type: 'bar',
+  data: {
+    labels: [ 'Job Offers', 'Job Requests', 'Job Interviews'],
+    datasets: [{
+      label: 'Jobs chart',
+      data: [nbJobOffer, nbJobRequest, nbJobInterview ],
+      backgroundColor: [
+        'green',
+        'purple',
+        'orange',
+      ],
+    }]
+  },
+});
+
+const doughnutChartctx1 = document.getElementById('doughnutChart1').getContext('2d');
+const doughnutChart1 = new Chart(doughnutChartctx1, {
+  type: 'doughnut',
+        data: {
+            labels: ['JE Students', 'non JE Students'],
+            datasets: [{
+                data: [nbJEStudents, nb_non_JEStudents],
+                backgroundColor: ['blue', 'purple'], 
+            }],
+        }
+    });
+
+const doughnutChartctx = document.getElementById('doughnutChart').getContext('2d');
+const doughnutChart = new Chart(doughnutChartctx, {
+  type: 'doughnut',
+        data: {
+            labels: ['Subscribed Students', 'Completed Profiles', 'LinkedIn Profiles'],
+            datasets: [{
+                data: [subscribedStudents, completedProfiles, linkedinProfiles],
+                backgroundColor: ['green', 'blue', 'purple'], 
+            }],
+        }
+    });
+
+// const polarAreaChartctx = document.getElementById('polarAreaChart').getContext('2d');
+// const polarAreaChart = new Chart(polarAreaChartctx, {
+//   type: 'polarArea',
+//   data: {
+//     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+//     datasets: [{
+//       label: 'Sample Polar Area Chart',
+//       data: [20, 40, 30, 10, 25],
+//       backgroundColor: ['red', 'blue', 'yellow', 'green', 'purple'],
+//     }]
+//   },
+// });
+
+</script>
+
+{% endblock %}
